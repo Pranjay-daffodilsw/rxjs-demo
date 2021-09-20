@@ -15,6 +15,9 @@ import { PeekABooDirective } from './directives/peekABoo.directive';
 import { booksReducer } from './state/book.reducer';
 import { collectionReducer } from './state/collection.reducer';
 import { HomeComponent } from './components/home/home.component';
+import { SampleComponent } from './components/sample/sample.component';
+import { BookStoreComponent } from './components/book-store/book-store.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { HomeComponent } from './components/home/home.component';
     BooksListComponent,
     BookCollectionComponent,
     HomeComponent,
+    SampleComponent,
+    BookStoreComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,6 @@ export class LifecycleComponent implements
   AfterViewChecked,
   OnDestroy {
 
-  @Input() sampleInput: string = '' ;
   DummyVariable = console.log("I am a variable declaration before constructor");
   public inputValue: string = '';
 
