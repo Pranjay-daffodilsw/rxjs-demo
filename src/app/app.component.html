@@ -254,6 +254,19 @@
   <div appPeekABoo [defaultColor]="'pink'">
     Peek a boo directive containing div
   </div>
+  <br />
+
+  <h2>Books</h2>
+  <app-book-list
+    [books]="(books$ | async) || []"
+    (add)="onAdd($event)"
+  ></app-book-list>
+  <h2>My Collection</h2>
+  <app-book-collection
+    [books]="(bookCollection$ | async) || []"
+    (remove)="onRemove($event)"
+  >
+  </app-book-collection>
 </div>
 
 <router-outlet></router-outlet>
