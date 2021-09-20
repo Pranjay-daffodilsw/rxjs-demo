@@ -14,7 +14,7 @@ import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.com
 import { PeekABooDirective } from './directives/peekABoo.directive';
 import { booksReducer } from './state/book.reducer';
 import { collectionReducer } from './state/collection.reducer';
-import { HomeComponent } from './app/components/home/home.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
