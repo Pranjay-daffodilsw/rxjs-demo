@@ -12,8 +12,6 @@ import { BooksListService } from './components/book-list/books-list.service';
 import { LifecycleComponent } from './components/lifecycle/lifecycle.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { PeekABooDirective } from './directives/peekABoo.directive';
-import { booksReducer } from './state/book.reducer';
-import { collectionReducer } from './state/collection.reducer';
 import { HomeComponent } from './components/home/home.component';
 import { SampleComponent } from './components/sample/sample.component';
 import { BookStoreComponent } from './components/book-store/book-store.component';
@@ -23,6 +21,8 @@ import { BootStrapModuleImports } from './bootstrapModuleImports';
 import { PostsListComponent } from './components/posts/posts-list/posts-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { appReducer } from './state/app.state';
+import { AddPostComponent } from './components/posts/add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -37,13 +37,14 @@ import { environment } from '../environments/environment';
     BookStoreComponent,
     HeaderComponent,
     PostsListComponent,
+    AddPostComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }, {}),
+    StoreModule.forRoot(appReducer, {}),
     BrowserAnimationsModule,
     ...BootStrapModuleImports,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
