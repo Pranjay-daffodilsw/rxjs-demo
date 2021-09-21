@@ -18,6 +18,11 @@ import { HomeComponent } from './components/home/home.component';
 import { SampleComponent } from './components/sample/sample.component';
 import { BookStoreComponent } from './components/book-store/book-store.component';
 import { HeaderComponent } from './components/header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BootStrapModuleImports } from './bootstrapModuleImports';
+import { PostsListComponent } from './components/posts/posts-list/posts-list.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,13 +36,17 @@ import { HeaderComponent } from './components/header/header.component';
     SampleComponent,
     BookStoreComponent,
     HeaderComponent,
+    PostsListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }, {})
+    StoreModule.forRoot({ books: booksReducer, collection: collectionReducer }, {}),
+    BrowserAnimationsModule,
+    ...BootStrapModuleImports,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [BooksListService],
   bootstrap: [AppComponent]
