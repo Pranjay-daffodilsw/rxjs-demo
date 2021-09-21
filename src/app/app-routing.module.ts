@@ -6,6 +6,7 @@ import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.com
 import { LifecycleComponent } from './components/lifecycle/lifecycle.component';
 import { BookStoreComponent } from './components/book-store/book-store.component';
 import { PostsListComponent } from './components/posts/posts-list/posts-list.component';
+import { AddPostComponent } from './components/posts/add-post/add-post.component';
 
 const routes: Routes = [
   {
@@ -30,7 +31,13 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    component: PostsListComponent
+    component: PostsListComponent,
+    children: [
+      {
+        path: 'add',
+        component: AddPostComponent
+      }
+    ]
   }
 ];
 
