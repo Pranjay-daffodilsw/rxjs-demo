@@ -18,12 +18,9 @@ import { BookStoreComponent } from './components/book-store/book-store.component
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BootStrapModuleImports } from './bootstrapModuleImports';
-import { PostsListComponent } from './components/posts/posts-list/posts-list.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { appReducer } from './state/app.state';
-import { AddPostComponent } from './components/posts/add-post/add-post.component';
-import { EditPostComponent } from './components/posts/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +34,6 @@ import { EditPostComponent } from './components/posts/edit-post/edit-post.compon
     SampleComponent,
     BookStoreComponent,
     HeaderComponent,
-    PostsListComponent,
-    AddPostComponent,
-    EditPostComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,9 +5,6 @@ import { SampleComponent } from './components/sample/sample.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { LifecycleComponent } from './components/lifecycle/lifecycle.component';
 import { BookStoreComponent } from './components/book-store/book-store.component';
-import { PostsListComponent } from './components/posts/posts-list/posts-list.component';
-import { AddPostComponent } from './components/posts/add-post/add-post.component';
-import { EditPostComponent } from './components/posts/edit-post/edit-post.component';
 
 const routes: Routes = [
   {
@@ -32,17 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    component: PostsListComponent,
-    children: [
-      {
-        path: 'add',
-        component: AddPostComponent
-      },
-      {
-        path: 'edit/:id',
-        component: EditPostComponent
-      }
-    ]
+    loadChildren: () => import('./components/posts/posts.module')
+      .then(m => m.PostsModule)
   }
 ];
 
