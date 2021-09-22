@@ -6,21 +6,17 @@ import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BookCollectionComponent } from './components/book-collection/book-collection.component';
-import { BooksListComponent } from './components/book-list/book-list.component';
-import { BooksListService } from './components/book-list/books-list.service';
 import { LifecycleComponent } from './components/lifecycle/lifecycle.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { PeekABooDirective } from './directives/peekABoo.directive';
 import { HomeComponent } from './components/home/home.component';
 import { SampleComponent } from './components/sample/sample.component';
-import { BookStoreComponent } from './components/book-store/book-store.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BootStrapModuleImports } from './bootstrapModuleImports';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { appReducer } from './state/app.state';
+// import { appReducer } from './state/app.state';
 
 @NgModule({
   declarations: [
@@ -28,11 +24,8 @@ import { appReducer } from './state/app.state';
     RxjsExampleComponent,
     LifecycleComponent,
     PeekABooDirective,
-    BooksListComponent,
-    BookCollectionComponent,
     HomeComponent,
     SampleComponent,
-    BookStoreComponent,
     HeaderComponent,
   ],
   imports: [
@@ -46,7 +39,7 @@ import { appReducer } from './state/app.state';
     ...BootStrapModuleImports,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
-  providers: [BooksListService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

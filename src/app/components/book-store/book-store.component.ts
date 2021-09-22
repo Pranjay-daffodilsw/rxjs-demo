@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select, Selector } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { selectBookCollection, selectBooks, selectCollectionState } from '../../state/book.selectors';
+import { selectBookCollection, selectBooks } from '../../state/book.selectors';
 import { retrievedBookList, addBook, removeBook } from '../../state/book.actions';
-import { BooksListService } from '../../components/book-list/books-list.service';
-import { Book } from '../../components/book-list/book.model';
+import { BooksListService } from './books-list.service';
+import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'app-book-store',
@@ -15,7 +15,7 @@ import { Book } from '../../components/book-list/book.model';
 export class BookStoreComponent implements OnInit {
 
   books$ = this.store.pipe(select(selectBooks))
-  bookCollection$: Observable<Array<Book>> = this.store.pipe(select(selectBookCollection));
+  bookCollection$: Observable<Array<Book>> = this.store.select(selectBookCollection);
 
   constructor(
     private booksService: BooksListService,

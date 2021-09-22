@@ -4,7 +4,6 @@ import { HomeComponent } from './components/home/home.component';
 import { SampleComponent } from './components/sample/sample.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { LifecycleComponent } from './components/lifecycle/lifecycle.component';
-import { BookStoreComponent } from './components/book-store/book-store.component';
 
 const routes: Routes = [
   {
@@ -21,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'books',
-    component: BookStoreComponent
+    loadChildren: () => import('./components/book-store/book-store.module')
+      .then(m => m.BookStoreModule)
   },
   {
     path: 'lifeCycle',

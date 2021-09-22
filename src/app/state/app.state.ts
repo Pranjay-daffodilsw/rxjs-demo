@@ -1,18 +1,25 @@
 import { ActionReducerMap } from '@ngrx/store';
-import { Book } from '../components/book-list/book.model';
+import { Book } from '../models/book.model';
 import { postsReducer } from '../components/posts/state/posts.reducer';
 import { PostsState } from '../components/posts/state/posts.state';
 import { booksReducer } from './book.reducer';
 import { collectionReducer } from './collection.reducer';
 
-export interface AppState {
+export interface BookStore {
   books: ReadonlyArray<Book>;
   collection: ReadonlyArray<string>;
-  posts: PostsState
 }
 
-export const appReducer: ActionReducerMap<AppState, any> = {
-  books: booksReducer,
-  collection: collectionReducer,
-  posts: postsReducer,
+export interface AppState {
+  bookStore: BookStore;
+  posts: PostsState;
 }
+
+
+// export const appReducer: ActionReducerMap<AppState, any> = {
+//   books: booksReducer,
+//   bookStore: {
+//     collection: collectionReducer,
+//     posts: postsReducer,
+//   }
+// }

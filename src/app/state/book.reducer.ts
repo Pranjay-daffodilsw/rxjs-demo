@@ -1,7 +1,7 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { retrievedBookList } from './book.actions';
-import { Book } from '../components/book-list/book.model';
+import { Book } from '../models/book.model';
 
 export const initialState: ReadonlyArray<Book> = [];
 
