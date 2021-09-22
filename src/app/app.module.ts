@@ -41,7 +41,7 @@ import { appReducer } from './state/app.state';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducer, {}),
+    StoreModule.forRoot({}, {}),
     BrowserAnimationsModule,
     ...BootStrapModuleImports,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
