@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BootStrapModuleImports } from './bootstrapModuleImports';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 // import { appReducer } from './state/app.state';
 
 @NgModule({
@@ -37,7 +38,8 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot({}, {}),
     BrowserAnimationsModule,
     ...BootStrapModuleImports,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
