@@ -10,6 +10,9 @@ import { User } from "../models/user.model";
   providedIn: 'root'
 })
 export class AuthService {
+
+  private timeOutInterval: any;
+
   constructor(
     private http: HttpClient
   ) {
@@ -74,6 +77,49 @@ export class AuthService {
       default:
         return 'An error has occured.\nPlease try again and if the error persist please contact support';
     }
+  }
+
+
+  setUserInLocalStorage(user: User) {
+    localStorage.setItem('userData', JSON.stringify(user))
+
+    this.runTimeoutIntervalForUser(user.expireDate);
+
+  }
+
+  getUserFromLocalStorage(): User | null {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      try {
+        const userData = JSON.parse(userDataString);
+        const expirationDate = new Date(userData.expirationDate);
+
+        const user = new User(
+          userData.idString,
+          userData.email,
+          userData.refreshToken,
+          userData.localId,
+          expirationDate
+        );
+        this.runTimeoutIntervalForUser(expirationDate);
+        return user;
+      } catch (err) {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  runTimeoutIntervalForUser(expiryDate: Date) {
+    const timeNow = new Date().getTime();
+    const expiryTime = expiryDate.getTime();
+
+    const timeInterval = expiryTime - timeNow;
+
+    this.timeOutInterval = setTimeout(() => {
+      // logout or get refreshed token
+    }, timeInterval);
   }
 
 

@@ -4,9 +4,10 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { catchError, exhaustMap, map, tap } from "rxjs/operators";
+import { User } from "src/app/models/user.model";
 import { AuthService } from "src/app/services/auth.service";
 import { setErrorMessage, setLoadingSpinner } from "src/app/state/shared/shared.actions";
-import { loginFail, loginStart, loginSucess, signupStart, signupSuccess } from "./auth.actions";
+import { autoLogin, loginFail, loginStart, loginSucess, signupStart, signupSuccess } from "./auth.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -17,6 +18,19 @@ export class AuthEffects {
     private router: Router,
   ) { }
 
+
+  autoLogin = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(autoLogin),
+      exhaustMap((action) => {
+        const user = this.authService.getUserFromLocalStorage()
+        console.log(user);
+
+        return of(loginSucess({ user: user! }))
+      })
+    )
+  });
+
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loginStart),
@@ -24,8 +38,8 @@ export class AuthEffects {
         return this.authService.login(action.email, action.password)
           .pipe(
             map((data) => {
-
               const user = this.authService.formatUser(data);
+              this.authService.setUserInLocalStorage(user);
               return loginSucess({ user });
             }),
             catchError((errorResponse) => {

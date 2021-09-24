@@ -19,6 +19,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { appReducer } from './state/app.state';
+import { AuthEffects } from './auth/state/auth.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { appReducer } from './state/app.state';
     BrowserAnimationsModule,
     ...BootStrapModuleImports,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent]

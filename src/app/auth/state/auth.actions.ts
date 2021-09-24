@@ -5,6 +5,8 @@ export const LOGIN_START = '[auth page] login start';
 export const LOGIN_SUCCESS = '[auth page] login success';
 export const LOGIN_FAIL = '[auth page] login fail';
 
+export const AUTO_LOGIN_ACTION = '[auth page] login action';
+
 export const SIGNUP_START = '[auth page] signup start';
 export const SIGNUP_SUCCESS = '[auth page] signup success';
 
@@ -20,6 +22,10 @@ export const loginSucess = createAction(
 
 export const loginFail = createAction(
   LOGIN_FAIL,
+);
+
+export const autoLogin = createAction(
+  AUTO_LOGIN_ACTION,
 );
 
 export const signupStart = createAction(
