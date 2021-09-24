@@ -17,7 +17,8 @@ import { BootStrapModuleImports } from './bootstrapModuleImports';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-// import { appReducer } from './state/app.state';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { appReducer } from './state/app.state';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { EffectsModule } from '@ngrx/effects';
     HomeComponent,
     SampleComponent,
     HeaderComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { EffectsModule } from '@ngrx/effects';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(appReducer, {}),
     BrowserAnimationsModule,
     ...BootStrapModuleImports,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

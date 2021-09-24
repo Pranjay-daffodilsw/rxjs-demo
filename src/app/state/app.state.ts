@@ -4,6 +4,9 @@ import { postsReducer } from '../components/posts/state/posts.reducer';
 import { PostsState } from '../components/posts/state/posts.state';
 import { booksReducer } from './book.reducer';
 import { collectionReducer } from './collection.reducer';
+import { SHARED_STATE_NAME } from './shared/shared.selectors';
+import { SharedState } from './shared/shared.state';
+import { SharedReducer } from './shared/shared.reducers';
 
 export interface BookStore {
   books: ReadonlyArray<Book>;
@@ -12,14 +15,10 @@ export interface BookStore {
 
 export interface AppState {
   bookStore: BookStore;
-  posts: PostsState;
+  [SHARED_STATE_NAME]: SharedState;
 }
 
 
-// export const appReducer: ActionReducerMap<AppState, any> = {
-//   books: booksReducer,
-//   bookStore: {
-//     collection: collectionReducer,
-//     posts: postsReducer,
-//   }
-// }
+export const appReducer: ActionReducerMap<any> = {
+  [SHARED_STATE_NAME]: SharedReducer
+}
