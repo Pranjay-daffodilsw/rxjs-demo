@@ -38,6 +38,18 @@ export class AuthService {
     return user;
   }
 
+  formatErrorMessage(message: string) {
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        return 'No account present for the provided email';
+      case 'INVALID_PASSWORD':
+        return 'Entered password is not valid';
+      case 'USER_DISABLED':
+        return 'The given account has been disabled please contact support'
+      default:
+        return 'An error has occured.\nPlease try again and if the error persist please contact support';
+    }
+  }
 
 
 }
