@@ -68,7 +68,7 @@
             >Posts</a
           >
         </li>
-        <li class="nav-item">
+        <li *ngIf="(isAuthenticated | async) === false" class="nav-item">
           <a
             class="nav-link"
             aria-current="page"
@@ -77,13 +77,22 @@
             >Login</a
           >
         </li>
-        <li class="nav-item">
+        <li *ngIf="(isAuthenticated | async) === false" class="nav-item">
           <a
             class="nav-link"
             aria-current="page"
             [routerLink]="'/auth/signup'"
             [routerLinkActive]="'active'"
             >Signup</a
+          >
+        </li>
+        <li *ngIf="isAuthenticated | async" class="nav-item">
+          <a
+            class="nav-link"
+            aria-current="page"
+            [routerLink]="'/auth/logout'"
+            [routerLinkActive]="'active'"
+            >Logout</a
           >
         </li>
       </ul>

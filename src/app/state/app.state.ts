@@ -7,6 +7,8 @@ import { collectionReducer } from './collection.reducer';
 import { SHARED_STATE_NAME } from './shared/shared.selectors';
 import { SharedState } from './shared/shared.state';
 import { SharedReducer } from './shared/shared.reducers';
+import { AUTH_STATE_NAME } from '../auth/state/auth.selector';
+import { AuthReducer } from '../auth/state/auth.reducer';
 
 export interface BookStore {
   books: ReadonlyArray<Book>;
@@ -20,5 +22,6 @@ export interface AppState {
 
 
 export const appReducer: ActionReducerMap<any> = {
-  [SHARED_STATE_NAME]: SharedReducer
+  [SHARED_STATE_NAME]: SharedReducer,
+  [AUTH_STATE_NAME]: AuthReducer,
 }
