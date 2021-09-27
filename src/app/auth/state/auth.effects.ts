@@ -7,7 +7,7 @@ import { catchError, exhaustMap, map, tap } from "rxjs/operators";
 import { User } from "src/app/models/user.model";
 import { AuthService } from "src/app/services/auth.service";
 import { setErrorMessage, setLoadingSpinner } from "src/app/state/shared/shared.actions";
-import { autoLogin, loginFail, loginStart, loginSucess, signupStart, signupSuccess } from "./auth.actions";
+import { autoLogin, loginFail, loginStart, loginSucess, logout, signupStart, signupSuccess } from "./auth.actions";
 
 @Injectable()
 export class AuthEffects {
@@ -26,7 +26,7 @@ export class AuthEffects {
         const user = this.authService.getUserFromLocalStorage()
         console.log(user);
 
-        return of(loginSucess({ user: user! }))
+        return of(loginSucess({ user: user!, redirect: false }))
       })
     )
   });
@@ -40,7 +40,7 @@ export class AuthEffects {
             map((data) => {
               const user = this.authService.formatUser(data);
               this.authService.setUserInLocalStorage(user);
-              return loginSucess({ user });
+              return loginSucess({ user, redirect: true });
             }),
             catchError((errorResponse) => {
               const message = this.authService.formatLoginErrorMessage(errorResponse?.error?.error?.message);
@@ -53,14 +53,23 @@ export class AuthEffects {
     )
   })
 
+  logout$ = createEffect(() => {
+    return this.actions$.pipe(ofType(logout), map(action => {
+      this.authService.logout();
+      this.router.navigate(['auth']);
+    }))
+  }, { dispatch: false })
+
 
   authSuccessRedirect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(...[loginSucess, signupSuccess]),
       tap((action) => {
         this.store.dispatch(setLoadingSpinner({ status: false }));
+        if (action.redirect) {
+          this.router.navigate(['/']);
+        }
         this.store.dispatch(setErrorMessage({ message: '' }));
-        this.router.navigate(['/'])
       })
     )
   }, { dispatch: false })
@@ -75,7 +84,7 @@ export class AuthEffects {
               this.store.dispatch(setLoadingSpinner({ status: false }));
               this.store.dispatch(setErrorMessage({ message: '' }));
               const user = this.authService.formatUser(data);
-              return signupSuccess({ user });
+              return signupSuccess({ user, redirect: true });
             }),
             catchError((errorResponse) => {
               const message = this.authService.formatSignupErrorMessage(errorResponse?.error?.error?.message);

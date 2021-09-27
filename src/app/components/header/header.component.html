@@ -90,8 +90,7 @@
           <a
             class="nav-link"
             aria-current="page"
-            [routerLink]="'/auth/logout'"
-            [routerLinkActive]="'active'"
+            (click)="onLogout($event)"
             >Logout</a
           >
         </li>

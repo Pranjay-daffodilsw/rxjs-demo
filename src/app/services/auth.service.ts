@@ -1,7 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { ApiKeys } from "../apiKeys";
+import { logout } from "../auth/state/auth.actions";
 import { AuthLoginResponseData } from "../models/authLoginResponseData.model";
 import { AuthSignupResponseData } from "../models/authSignupResponseData.model";
 import { User } from "../models/user.model";
@@ -14,7 +16,8 @@ export class AuthService {
   private timeOutInterval: any;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private store: Store,
   ) {
 
   }
@@ -119,8 +122,16 @@ export class AuthService {
 
     this.timeOutInterval = setTimeout(() => {
       // logout or get refreshed token
+      this.store.dispatch(logout());
     }, timeInterval);
   }
 
+  logout() {
+    localStorage.removeItem('userData');
+    if(this.timeOutInterval){
+      clearTimeout(this.timeOutInterval);
+      this.timeOutInterval = null;
+    }
+  }
 
 }
