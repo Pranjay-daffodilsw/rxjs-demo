@@ -13,8 +13,8 @@ export class PostsService {
   ) { }
 
   getPosts(): Observable<Array<Post>> {
-    return this.http
-      .get('https://ngrx-demo-d7dd3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
+    return this.http.get<Array<Post>>
+      ('https://ngrx-demo-d7dd3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
       .pipe(
         map((data: any) => {
           if (Array.isArray(data) && data.length) {
@@ -27,6 +27,34 @@ export class PostsService {
             return posts ?? [];
           }
         })
-      ) as Observable<Array<Post>>;
+      );
+  }
+
+  addPost(post: Post): Observable<{ name: string }> {
+    return this.http.post<{ name: string }>(
+      'https://ngrx-demo-d7dd3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+      {
+        ...post
+      }
+    );
+  }
+
+  updatePost(post: Post) {
+    const body = {
+      [post.id]: {
+        title: post.title,
+        description: post.description,
+      }
+    }
+    return this.http.patch(
+      'https://ngrx-demo-d7dd3-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+      body
+    );
+  }
+
+  deletePost(id: string) {
+    return this.http.delete(
+      `https://ngrx-demo-d7dd3-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${id}.json`
+    );
   }
 }
