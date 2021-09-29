@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SampleComponent } from './components/sample/sample.component';
 import { RxjsExampleComponent } from './components/rxjs-example/rxjs-example.component';
 import { LifecycleComponent } from './components/lifecycle/lifecycle.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
   {
     path: 'posts',
     loadChildren: () => import('./components/posts/posts.module')
-      .then(m => m.PostsModule)
+      .then(m => m.PostsModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',

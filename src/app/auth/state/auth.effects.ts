@@ -24,8 +24,6 @@ export class AuthEffects {
       ofType(autoLogin),
       exhaustMap((action) => {
         const user = this.authService.getUserFromLocalStorage()
-        console.log(user);
-
         return of(loginSucess({ user: user!, redirect: false }))
       })
     )

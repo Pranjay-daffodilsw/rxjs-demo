@@ -98,7 +98,7 @@ export class AuthService {
         const expirationDate = new Date(userData.expirationDate);
 
         const user = new User(
-          userData.idString,
+          userData.idToken,
           userData.email,
           userData.refreshToken,
           userData.localId,
