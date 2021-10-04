@@ -18,7 +18,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
   public postForm: FormGroup;
 
   constructor(
-    private router: Router,
     private store: Store<AppState>,
   ) {
     this.postForm = new FormGroup({
@@ -60,7 +59,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
     if (this.postForm.valid) {
       const post = this.postForm.value;
       this.store.dispatch(updatePost({ post }));
-      this.router.navigate(['posts']);
     }
   }
 
