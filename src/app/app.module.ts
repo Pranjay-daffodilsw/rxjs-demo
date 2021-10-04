@@ -22,6 +22,7 @@ import { appReducer } from './state/app.state';
 import { AuthEffects } from './auth/state/auth.effects';
 import { AuthTokenInterceptor } from './services/AuthToken.interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './state/router/custom-serializer';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     ...BootStrapModuleImports,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AuthEffects]),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true }
