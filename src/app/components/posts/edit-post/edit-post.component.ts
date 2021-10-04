@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
@@ -18,7 +18,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
   public postForm: FormGroup;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private store: Store<AppState>,
   ) {
@@ -39,19 +38,17 @@ export class EditPostComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.route.paramMap.subscribe((params) => {
-        const id = params.get('id')!;
-        this.subscription.add(
-          this.store.select(getPostById(id))
-            .subscribe(post => {
-              this.postForm.setValue({
-                id: post?.id,
-                title: post?.title,
-                description: post?.description,
-              })
+      this.store.select(getPostById).subscribe(
+        post => {
+          if (post) {
+            this.postForm.setValue({
+              id: post?.id,
+              title: post?.title,
+              description: post?.description,
             })
-        );
-      })
+          }
+        }
+      )
     )
   }
 
