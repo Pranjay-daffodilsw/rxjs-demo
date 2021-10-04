@@ -19,11 +19,14 @@
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
           <td>
+            <a class="btn btn-info" [routerLink]="['details', post.id]">
+              Details </a
+            >&nbsp;
             <a
               class="btn btn-primary"
               [routerLink]="['//posts', 'edit', post.id]"
               >Update</a
-            >
+            >&nbsp;
             <button class="btn btn-danger" (click)="onDelete(post.id)">
               Delete
             </button>
