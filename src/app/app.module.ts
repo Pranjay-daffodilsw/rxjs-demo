@@ -23,6 +23,7 @@ import { AuthEffects } from './auth/state/auth.effects';
 import { AuthTokenInterceptor } from './services/AuthToken.interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { CustomSerializer } from './state/router/custom-serializer';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,12 @@ import { CustomSerializer } from './state/router/custom-serializer';
     EffectsModule.forRoot([AuthEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
     }),
   ],
   providers: [
