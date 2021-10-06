@@ -10,7 +10,7 @@ import { getPostById } from '../state/posts.selector';
   styleUrls: ['./single-post.component.less']
 })
 export class SinglePostComponent implements OnInit {
-  public post!: Observable<Post | null>;
+  public post!: Observable<Post | null | undefined>;
 
   constructor(
     private store: Store,
