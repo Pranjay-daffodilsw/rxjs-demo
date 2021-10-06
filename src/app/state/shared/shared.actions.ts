@@ -12,3 +12,5 @@ export const setErrorMessage = createAction(
   SET_ERROR_MESSAGE,
   props<{ message: string }>()
 )
+
+export const dummyAction = createAction('[dummy action]');

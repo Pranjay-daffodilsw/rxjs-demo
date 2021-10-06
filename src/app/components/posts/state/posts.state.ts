@@ -3,8 +3,19 @@ import { Post } from "src/app/models/posts.model";
 
 export const POST_STATE_KEY = 'posts';
 
-export interface PostsState extends EntityState<Post> { }
+export interface PostsState extends EntityState<Post> {
+  count: number;
+}
 
-export const postsAdaptor = createEntityAdapter<Post>();
+export function sortByName(a: Post, b: Post): number {
+  return a.title.localeCompare(b.title);
+}
 
-export const initialState: PostsState = postsAdaptor.getInitialState()
+export const postsAdaptor = createEntityAdapter<Post>({
+  selectId: (post) => post.id,
+  sortComparer: sortByName
+});
+
+export const initialState: PostsState = postsAdaptor.getInitialState({
+  count: 0,
+})
